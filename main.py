@@ -4,8 +4,13 @@ import pandas as pd
 
 
 def showDataForProducts(list):
+    tweetDataList = []
     for i in list:
-        getTweets(i)
+        tweetDataList.append(analyzeSentiment(getTweets(i)))
+    tweetDataFrame = pd.DataFrame(data=tweetDataList, columns="Polarity Scores:")
+
+    print(tweetDataFrame.mean())
+    return
 
 
 def getTweets(product):
@@ -29,7 +34,6 @@ def analyzeSentiment(data):
 
 
 if __name__ == '__main__':
-    a = analyzeSentiment(getTweets("fitbit"))
-    b = analyzeSentiment(getTweets("apple watch"))
+    showDataForProducts(["fitbit", "apple watch"])
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
